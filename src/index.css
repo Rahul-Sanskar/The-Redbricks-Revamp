@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── BASE ──────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent width recalculation when scrollbar appears */
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    @apply bg-white text-charcoal font-sans;
+    font-size: 1rem;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* Emaar uses very light serif for all headings */
+  h1, h2, h3, h4 {
+    @apply font-display font-light;
+    line-height: 1.1;
+  }
+
+  img, video { display: block; max-width: 100%; }
+
+  ::selection { background: #84251F; color: #FFFFFF; }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #F7F5F2; }
+  ::-webkit-scrollbar-thumb { background: #C9A96E; border-radius: 2px; }
+
+  /* Skip link */
+  .skip-link {
+    position: absolute; top: -100px; left: 0; z-index: 100;
+    padding: 0.75rem 1.5rem; background: #1A1A1A; color: #FFF;
+    font-size: 0.875rem; text-decoration: none;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus { top: 0; }
+
+  /* Keyboard focus rings */
+  :focus-visible { outline: 2px solid #84251F; outline-offset: 3px; }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  /* Disable Ken-Burns on mobile (save battery, avoid GPU layer) */
+  @media (max-width: 767px) {
+    [data-ken-burns] { animation: none !important; }
+  }
+}
+
+/* ── COMPONENTS ────────────────────────────────────────────── */
+@layer components {
+
+  /* ── Layout container — Emaar-width ── */
+  .container-site {
+    @apply w-full max-w-site mx-auto px-5 md:px-10 lg:px-14 xl:px-16;
+  }
+
+  /* ── Section spacing ── */
+  .section-gap {
+    @apply py-20 md:py-28 lg:py-section;
+  }
+  .section-gap-md {
+    @apply py-14 md:py-20 lg:py-section-md;
+  }
+  .section-gap-sm {
+    @apply py-10 md:py-14 lg:py-section-sm;
+  }
+
+  /* ── Eyebrow / category label — Emaar style ── */
+  /* Small-caps, very light tracking, stone colour */
+  .eyebrow {
+    @apply font-sans text-label uppercase tracking-[0.16em] font-normal text-stone;
+  }
+  .eyebrow-dark {
+    @apply font-sans text-label uppercase tracking-[0.16em] font-normal text-stone/80;
+  }
+
+  /* ── Buttons ── */
+  /* Emaar primary: filled black, very restrained */
+  .btn-primary {
+    @apply inline-flex items-center gap-3
+           bg-charcoal text-white font-sans text-ui-sm font-normal tracking-[0.1em] uppercase
+           px-7 py-3.5
+           transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]
+           hover:bg-charcoal-light
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal;
+  }
+  /* Emaar secondary: thin outline */
+  .btn-outline {
+    @apply inline-flex items-center gap-3
+           border border-charcoal text-charcoal font-sans text-ui-sm font-normal tracking-[0.1em] uppercase
+           px-7 py-3.5
+           transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]
+           hover:bg-charcoal hover:text-white
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal;
+  }
+  /* Light outline for dark backgrounds */
+  .btn-outline-light {
+    @apply inline-flex items-center gap-3
+           border border-white/60 text-white font-sans text-ui-sm font-normal tracking-[0.1em] uppercase
+           px-7 py-3.5
+           transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]
+           hover:bg-white hover:text-charcoal
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white;
+  }
+  /* Text link with arrow — used extensively by Emaar */
+  .btn-text {
+    @apply inline-flex items-center gap-2
+           font-sans text-ui-sm tracking-[0.06em] uppercase text-charcoal
+           transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
+           hover:gap-4
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal;
+  }
+  .btn-text-light {
+    @apply inline-flex items-center gap-2
+           font-sans text-ui-sm tracking-[0.06em] uppercase text-white/90
+           transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
+           hover:gap-4;
+  }
+
+  /* ── Form input — Emaar minimal style ── */
+  .input-field {
+    @apply w-full bg-transparent border-b border-stone/30 py-3
+           font-sans text-ui-base text-charcoal placeholder-stone/60
+           focus:outline-none focus:border-charcoal
+           transition-colors duration-300;
+  }
+  .input-field-dark {
+    @apply w-full bg-transparent border-b border-white/25 py-3
+           font-sans text-ui-base text-white placeholder-white/40
+           focus:outline-none focus:border-white
+           transition-colors duration-300;
+  }
+
+  /* ── Thin divider ── */
+  .divider { @apply block w-full h-px bg-stone/15; }
+  .divider-dark { @apply block w-full h-px bg-white/12; }
+
+  /* ── Nav height helpers ── */
+  .h-nav { height: 72px; }
+  .pt-nav { padding-top: 72px; }
+
+  /* ── Emaar-style card ── */
+  /* No shadow, no border-radius, image-led portrait layout */
+  .property-card {
+    @apply relative flex flex-col bg-white overflow-hidden
+           transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]
+           will-change-transform;
+  }
+  .property-card:hover .property-card-img {
+    transform: scale(1.04);
+  }
+  .property-card-img {
+    @apply w-full h-full object-cover
+           transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)];
+  }
+
+  /* ── Horizontal scroll container ── */
+  .scroll-container {
+    @apply flex gap-5 overflow-x-auto
+           scrollbar-none
+           snap-x snap-mandatory
+           pb-2;
+  }
+  /* hide scrollbar cross-browser */
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* ── Section label line ── */
+  /* Emaar places a thin line before section headings */
+  .section-label {
+    @apply font-sans text-ui-xs uppercase tracking-[0.2em] text-stone
+           flex items-center gap-4;
+  }
+  .section-label::before {
+    content: '';
+    @apply block w-8 h-px bg-stone/40 shrink-0;
+  }
+}
