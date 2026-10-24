@@ -226,7 +226,7 @@ export default function ContactPage() {
         {/* ── Page hero ── */}
         <section
           className="bg-charcoal text-center"
-          style={{ paddingTop: 'calc(72px + 5rem)', paddingBottom: '5rem' }}
+          style={{ paddingTop: 'calc(80px + 5rem)', paddingBottom: '5rem' }}
           aria-label="Contact page header"
         >
           <div className="container-site">

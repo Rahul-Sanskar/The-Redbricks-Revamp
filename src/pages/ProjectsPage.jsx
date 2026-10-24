@@ -61,7 +61,7 @@ export default function ProjectsPage() {
         {/* ── Page hero ── */}
         <section
           className="bg-charcoal text-center relative overflow-hidden"
-          style={{ paddingTop: 'calc(72px + 5rem)', paddingBottom: '5rem' }}
+          style={{ paddingTop: 'calc(80px + 5rem)', paddingBottom: '5rem' }}
           aria-label="Projects page header"
         >
           {/* Subtle architectural bg texture using the hero image at low opacity */}
@@ -127,7 +127,7 @@ export default function ProjectsPage() {
         </section>
 
         {/* ── Filter strip ── */}
-        <div className="sticky top-[72px] z-40 bg-white border-b border-stone/[0.12]">
+        <div className="sticky top-[80px] z-40 bg-white border-b border-stone/[0.12]">
           <div className="container-site">
             <div
               role="tablist"

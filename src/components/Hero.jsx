@@ -4,35 +4,53 @@ import { motion, AnimatePresence } from 'framer-motion'
 import useReducedMotion from '../hooks/useReducedMotion.js'
 
 /**
- * HERO SLIDES — verified project data only, no invented details.
+ * HERO SLIDES
+ * Using the best available elevation images for each project.
+ * Banner headline intentionally separates brand story from project names —
+ * the first slide IS the brand statement, subsequent slides are projects.
  */
 const SLIDES = [
+  // ── Slide 0: Brand — pure atmosphere, not tied to one project ──────────────
+  {
+    id:        'brand',
+    image:     '/images/celestia-lg.jpg',
+    imageWebp: '/images/celestia-lg.webp',
+    alt:       'Premium residential architecture in Navi Mumbai',
+    eyebrow:   'Premium Real Estate Partners · Navi Mumbai',
+    headline:  'Where Commitment Meets\nExceptional Living',
+    sub:       'Two decades of trusted expertise in residential and commercial real estate across Navi Mumbai.',
+    href:      '/projects/',
+    cta:       'Explore Our Portfolio',
+    community: 'Navi Mumbai',
+    // Brand slide uses a richer two-layer gradient for maximum impact
+    isBrand:   true,
+  },
+  // ── Project slides ──────────────────────────────────────────────────────────
   {
     id:        'celestia',
     image:     '/images/celestia-lg.jpg',
     imageWebp: '/images/celestia-lg.webp',
-    alt:       'Celestia — premium residences, Kharghar',
+    alt:       'Celestia — premium 3 & 4 BHK residences, Kharghar',
     eyebrow:   'Residential · Upcoming',
-    // Short headline — Emaar always uses the project name alone
     headline:  'Celestia',
-    // Sub ≤ 10 words — Emaar restraint
     sub:       '3 & 4 BHK residences. Kharghar, Navi Mumbai.',
     href:      '/projects/celestia/',
     cta:       'Explore Celestia',
-    // Community label shown beside the counter — Emaar pattern
     community: 'Kharghar',
+    isBrand:   false,
   },
   {
     id:        'silver-crest',
     image:     '/images/silver-crest-lg.jpg',
     imageWebp: '/images/silver-crest-lg.webp',
-    alt:       'Silver Crest — premium residences, Nerul',
+    alt:       'Silver Crest — premium 2 & 3 BHK residences, Nerul',
     eyebrow:   'Residential · Upcoming',
     headline:  'Silver Crest',
     sub:       '2 & 3 BHK residences. Nerul, Navi Mumbai.',
     href:      '/projects/silver-crest/',
     cta:       'Explore Silver Crest',
     community: 'Nerul',
+    isBrand:   false,
   },
   {
     id:        'trident',
@@ -45,6 +63,33 @@ const SLIDES = [
     href:      '/projects/trident-elevation/',
     cta:       'Explore Trident',
     community: 'Mahape',
+    isBrand:   false,
+  },
+  {
+    id:        'hitech-cosmos',
+    image:     '/images/hitech-cosmos-lg.jpg',
+    imageWebp: '/images/hitech-cosmos-lg.webp',
+    alt:       'Hitech Cosmos — residential development, Kharghar',
+    eyebrow:   'Residential · Ongoing',
+    headline:  'Hitech Cosmos',
+    sub:       '2 & 3 BHK residences. Kharghar Sector 11, Navi Mumbai.',
+    href:      '/projects/hitech-cosmos/',
+    cta:       'Explore Hitech Cosmos',
+    community: 'Kharghar',
+    isBrand:   false,
+  },
+  {
+    id:        'business-square',
+    image:     '/images/business-square-lg.jpg',
+    imageWebp: '/images/business-square-lg.webp',
+    alt:       'Business Square — commercial development, Nerul MIDC',
+    eyebrow:   'Commercial · Ongoing',
+    headline:  'Business Square',
+    sub:       'Office spaces & retail. Nerul MIDC, Navi Mumbai.',
+    href:      '/projects/business-square/',
+    cta:       'Explore Business Square',
+    community: 'Nerul',
+    isBrand:   false,
   },
 ]
 
@@ -64,7 +109,6 @@ export default function Hero() {
     setCurrent((c) => (c + dir + count) % count)
   }, [count])
 
-  // Reset and restart the timer whenever the slide changes or paused state changes
   useEffect(() => {
     clearInterval(timerRef.current)
     if (prefersReduced || paused) return
@@ -78,35 +122,33 @@ export default function Hero() {
     setCurrent(idx)
   }
 
-  // Cross-dissolve — no x translation, just opacity + subtle scale
   const imgVariants = {
-    enter:  { opacity: 0, scale: prefersReduced ? 1 : 1.03 },
+    enter:  { opacity: 0, scale: prefersReduced ? 1 : 1.04 },
     center: { opacity: 1, scale: 1 },
-    exit:   { opacity: 0, scale: prefersReduced ? 1 : 1.01 },
+    exit:   { opacity: 0 },
   }
 
   const textVariants = {
-    enter:  { opacity: 0, y: prefersReduced ? 0 : 18 },
+    enter:  { opacity: 0, y: prefersReduced ? 0 : 24 },
     center: { opacity: 1, y: 0 },
-    exit:   { opacity: 0, y: prefersReduced ? 0 : -10 },
+    exit:   { opacity: 0, y: prefersReduced ? 0 : -8 },
   }
 
-  const imgTrans  = { duration: prefersReduced ? 0.15 : 1.2, ease: SLIDE_EASE }
-  const textTrans = { duration: prefersReduced ? 0.15 : 0.7, ease: SLIDE_EASE, delay: 0.18 }
+  const imgTrans  = { duration: prefersReduced ? 0.15 : 1.4, ease: SLIDE_EASE }
+  const textTrans = { duration: prefersReduced ? 0.15 : 0.8, ease: SLIDE_EASE, delay: 0.2 }
 
   const slide = SLIDES[current]
 
   return (
     <section
-      aria-label="Featured properties"
+      aria-label="Featured properties carousel"
       aria-roledescription="carousel"
-      className="relative w-full overflow-hidden bg-[#141210]"
-      // 100dvh with 100svh fallback for iOS Safari
-      style={{ height: '100svh', minHeight: '560px' }}
+      className="relative w-full overflow-hidden"
+      style={{ height: '100svh', minHeight: '600px', background: '#0C0A09' }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* ── Background images — cross-dissolve ── */}
+      {/* ── Slide images ── */}
       <AnimatePresence initial={false}>
         <motion.div
           key={`img-${slide.id}`}
@@ -131,107 +173,178 @@ export default function Hero() {
         </motion.div>
       </AnimatePresence>
 
-      {/* ── Gradient — bottom-heavy, minimal ── */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(to top, rgba(14,12,10,0.88) 0%, rgba(14,12,10,0.45) 28%, rgba(14,12,10,0.08) 55%, transparent 75%)',
-        }}
-        aria-hidden="true"
-      />
+      {/* ── Gradient overlays ──
+           Brand slide: richer two-layer gradient for a more cinematic feel.
+           Project slides: clean bottom-up fade.
+      ── */}
+      {slide.isBrand ? (
+        <>
+          {/* Left-side vignette for brand slide */}
+          <div
+            className="absolute inset-0 z-10 pointer-events-none"
+            style={{
+              background: 'linear-gradient(105deg, rgba(10,8,7,0.75) 0%, rgba(10,8,7,0.3) 55%, transparent 80%)',
+            }}
+            aria-hidden="true"
+          />
+          {/* Bottom gradient for text readability */}
+          <div
+            className="absolute inset-0 z-10 pointer-events-none"
+            style={{
+              background: 'linear-gradient(to top, rgba(10,8,7,0.85) 0%, rgba(10,8,7,0.35) 35%, transparent 65%)',
+            }}
+            aria-hidden="true"
+          />
+        </>
+      ) : (
+        <div
+          className="absolute inset-0 z-10 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, rgba(10,8,7,0.90) 0%, rgba(10,8,7,0.50) 30%, rgba(10,8,7,0.12) 58%, transparent 78%)',
+          }}
+          aria-hidden="true"
+        />
+      )}
 
-      {/* ── Slide text — bottom-left ── */}
+      {/* ── Text content — bottom-left ── */}
       <div
         className="absolute inset-0 z-20 flex flex-col justify-end"
-        style={{ paddingBottom: 'clamp(3.5rem, 7vw, 6.5rem)' }}
+        style={{ paddingBottom: 'clamp(4rem, 8vw, 7rem)' }}
       >
         <div className="container-site">
           <AnimatePresence mode="wait">
             <motion.div
               key={`text-${slide.id}`}
-              className="max-w-[600px]"
               variants={textVariants}
               initial="enter"
               animate="center"
               exit="exit"
               transition={textTrans}
+              className={slide.isBrand ? 'max-w-[740px]' : 'max-w-[600px]'}
             >
               {/* Eyebrow */}
-              <p className="font-sans text-[0.65rem] tracking-[0.2em] uppercase text-white/60 mb-4">
+              <motion.p
+                className="font-sans text-[0.65rem] tracking-[0.22em] uppercase text-white/55 mb-5"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.35, duration: 0.6 }}
+              >
                 {slide.eyebrow}
-              </p>
+              </motion.p>
 
-              {/* Headline — project name */}
+              {/* Headline */}
               <h1
-                className="font-display font-light text-white mb-4 leading-[1.04]"
-                style={{ fontSize: 'clamp(2.6rem,5.5vw,5rem)', letterSpacing: '-0.025em' }}
+                className="font-display font-light text-white mb-5 leading-[1.04] whitespace-pre-line"
+                style={{
+                  fontSize:      slide.isBrand
+                    ? 'clamp(2.75rem,6.5vw,5.75rem)'
+                    : 'clamp(2.6rem,5.5vw,5rem)',
+                  letterSpacing: '-0.025em',
+                }}
               >
                 {slide.headline}
               </h1>
 
-              {/* Sub — one short sentence */}
+              {/* Sub */}
               <p
-                className="font-sans font-light text-white/65 mb-8 leading-snug"
-                style={{ fontSize: 'clamp(0.875rem,1.3vw,1rem)' }}
+                className="font-sans font-light text-white/65 mb-9 leading-relaxed"
+                style={{
+                  fontSize: slide.isBrand
+                    ? 'clamp(0.9rem,1.5vw,1.125rem)'
+                    : 'clamp(0.875rem,1.3vw,1rem)',
+                  maxWidth: slide.isBrand ? '520px' : '440px',
+                }}
               >
                 {slide.sub}
               </p>
 
-              {/* CTA */}
-              <Link
-                to={slide.href}
-                className="btn-outline-light"
-                aria-label={slide.cta}
-              >
-                {slide.cta}
-                <ArrowRight />
-              </Link>
+              {/* CTAs — brand slide gets two buttons */}
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  to={slide.href}
+                  className="btn-outline-light"
+                  aria-label={slide.cta}
+                >
+                  {slide.cta}
+                  <ArrowRight />
+                </Link>
+                {slide.isBrand && (
+                  <a
+                    href="/contact-us/"
+                    className="inline-flex items-center gap-2.5 font-sans text-ui-sm
+                      tracking-[0.1em] uppercase text-white/60
+                      hover:text-white transition-colors duration-300"
+                  >
+                    Speak with us
+                  </a>
+                )}
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
       </div>
 
-      {/* ── Bottom strip: counter + community + arrows ── */}
-      {/*
-        Emaar pattern: counter bottom-left, community name beside it,
-        prev/next arrows bottom-right — all on the same horizontal line.
-      */}
-      <div className="absolute bottom-8 left-0 right-0 z-30 container-site flex items-center justify-between">
+      {/* ── Brand stats bar — only on the brand slide ── */}
+      <AnimatePresence>
+        {slide.isBrand && !prefersReduced && (
+          <motion.div
+            key="stats"
+            className="absolute right-0 bottom-[4.5rem] z-30 hidden lg:flex flex-col gap-5 pr-12"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ delay: 0.7, duration: 0.8, ease: SLIDE_EASE }}
+          >
+            {[
+              { value: '20+',     label: 'Years Expertise' },
+              { value: '5,000+',  label: 'Investors' },
+              { value: '5L+ sqft',label: 'Inventory Sold' },
+            ].map((s) => (
+              <div key={s.label} className="text-right">
+                <p className="font-display font-light text-white text-2xl leading-none mb-0.5">
+                  {s.value}
+                </p>
+                <p className="font-sans text-[0.58rem] text-white/40 uppercase tracking-[0.14em]">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        {/* Counter + community name */}
+      {/* ── Bottom strip: counter + community + arrows ── */}
+      <div className="absolute bottom-8 left-0 right-0 z-30 container-site flex items-center justify-between">
         <div className="flex items-center gap-4" aria-hidden="true">
-          <span className="font-sans text-[0.65rem] text-white/45 tracking-[0.12em]">
+          <span className="font-sans text-[0.65rem] text-white/40 tracking-[0.12em]">
             {String(current + 1).padStart(2, '0')}
             <span className="mx-1.5 text-white/20">/</span>
             {String(count).padStart(2, '0')}
           </span>
-          {/* Thin separator */}
-          <span className="w-px h-3 bg-white/20" aria-hidden="true" />
-          {/* Community label — appears with the slide text */}
+          <span className="w-px h-3 bg-white/20" />
           <AnimatePresence mode="wait">
             <motion.span
-              key={`community-${slide.id}`}
-              className="font-sans text-[0.65rem] text-white/45 tracking-[0.12em] uppercase"
+              key={`loc-${slide.id}`}
+              className="font-sans text-[0.65rem] text-white/40 tracking-[0.14em] uppercase"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: SLIDE_EASE }}
+              transition={{ duration: 0.35 }}
             >
               {slide.community}
             </motion.span>
           </AnimatePresence>
         </div>
 
-        {/* Prev / Next — square minimal buttons */}
         <div className="flex items-center gap-2">
           <button
             onClick={() => advance(-1)}
             aria-label="Previous slide"
             className="w-9 h-9 flex items-center justify-center
-              border border-white/25 text-white/60
-              hover:border-white/60 hover:text-white
-              transition-all duration-300"
+              border border-white/20 text-white/55
+              hover:border-white/55 hover:text-white
+              transition-all duration-300 focus-visible:outline-none
+              focus-visible:ring-1 focus-visible:ring-white/50"
           >
             <ChevronLeft />
           </button>
@@ -239,16 +352,17 @@ export default function Hero() {
             onClick={() => advance(1)}
             aria-label="Next slide"
             className="w-9 h-9 flex items-center justify-center
-              border border-white/25 text-white/60
-              hover:border-white/60 hover:text-white
-              transition-all duration-300"
+              border border-white/20 text-white/55
+              hover:border-white/55 hover:text-white
+              transition-all duration-300 focus-visible:outline-none
+              focus-visible:ring-1 focus-visible:ring-white/50"
           >
             <ChevronRight />
           </button>
         </div>
       </div>
 
-      {/* ── Progress bar indicators — very bottom edge ── */}
+      {/* ── Progress bar indicators ── */}
       <div
         className="absolute bottom-0 left-0 right-0 z-30 flex"
         role="tablist"
@@ -261,9 +375,9 @@ export default function Hero() {
             aria-selected={i === current}
             aria-label={`Go to ${s.headline}`}
             onClick={() => goTo(i)}
-            className="relative flex-1 h-[3px] bg-white/15 overflow-hidden
-              hover:bg-white/30 transition-colors duration-300
-              focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/60"
+            className="relative flex-1 h-[3px] bg-white/12 overflow-hidden
+              hover:bg-white/25 transition-colors duration-300
+              focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50"
           >
             {i === current && !prefersReduced && (
               <motion.span
@@ -274,9 +388,7 @@ export default function Hero() {
                 transition={{ duration: INTERVAL / 1000, ease: 'linear' }}
               />
             )}
-            {i < current && (
-              <span className="absolute inset-0 bg-white" />
-            )}
+            {i < current && <span className="absolute inset-0 bg-white" />}
             <span className="sr-only">{s.headline}</span>
           </button>
         ))}

@@ -57,7 +57,7 @@ export default function ServicesPage() {
         {/* ── Page hero header ── */}
         <section
           className="bg-charcoal text-center"
-          style={{ paddingTop: 'calc(72px + 5rem)', paddingBottom: '5rem' }}
+          style={{ paddingTop: 'calc(80px + 5rem)', paddingBottom: '5rem' }}
           aria-label="Services page header"
         >
           <div className="container-site">

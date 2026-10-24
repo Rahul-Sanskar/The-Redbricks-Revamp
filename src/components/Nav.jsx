@@ -23,7 +23,7 @@ export default function Nav() {
             ? 'bg-white border-b border-stone/15'
             : 'bg-transparent border-b border-transparent'
           }`}
-        style={{ height: '72px' }}
+        style={{ height: '80px' }}
       >
         <div className="container-site h-full flex items-center justify-between gap-8">
 
@@ -33,15 +33,15 @@ export default function Nav() {
             aria-label="The Redbricks — Home"
             className="flex items-center shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brick"
           >
-            {/* Official square logo — contains both mark and wordmark */}
+            {/* Official logo — sized to fill the nav height properly */}
             <picture>
               <source srcSet="/logo-sq.webp" type="image/webp" />
               <img
                 src="/logo-sq.png"
                 alt="The Redbricks"
-                width={44}
-                height={44}
-                className="h-11 w-auto object-contain"
+                width={140}
+                height={64}
+                className="h-[64px] w-auto object-contain"
               />
             </picture>
           </Link>
@@ -157,7 +157,7 @@ export default function Nav() {
               {/* Drawer header */}
               <div
                 className="flex items-center justify-between px-7 border-b border-stone/12"
-                style={{ height: '72px' }}
+                style={{ height: '80px' }}
               >
                 <Link
                   to="/"
@@ -170,7 +170,7 @@ export default function Nav() {
                     <img
                       src="/logo-sq.png"
                       alt="The Redbricks"
-                      className="h-9 w-auto object-contain"
+                      className="h-12 w-auto object-contain"
                     />
                   </picture>
                 </Link>

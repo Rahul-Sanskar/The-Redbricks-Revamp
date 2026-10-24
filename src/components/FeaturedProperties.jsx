@@ -116,7 +116,7 @@ export default function FeaturedProperties({ showAll = false }) {
                 data-card
                 className="snap-start shrink-0 border border-stone/20 hover:border-charcoal/40
                   transition-colors duration-300 flex items-center justify-center"
-                style={{ width: 'clamp(220px,26vw,300px)', aspectRatio: '3/4' }}
+                style={{ width: 'clamp(220px,26vw,300px)', aspectRatio: '2/3' }}
               >
                 <Link
                   to="/projects/"
@@ -205,7 +205,7 @@ function ProjectCard({ project, index, prefersReduced, horizontal = false }) {
       }}
       className={`group snap-start shrink-0 bg-white border border-stone/[0.10]
         hover:border-stone/30 transition-colors duration-300 ${horizontal ? '' : 'w-full'}`}
-      style={horizontal ? { width: 'clamp(260px,28vw,340px)' } : undefined}
+      style={horizontal ? { width: 'clamp(280px,30vw,360px)' } : undefined}
     >
       <Link
         to={`/projects/${project.slug}/`}
@@ -213,12 +213,12 @@ function ProjectCard({ project, index, prefersReduced, horizontal = false }) {
           focus-visible:outline-offset-2 focus-visible:outline-brick"
         aria-label={`Explore ${project.name}, ${project.location}`}
       >
-        {/* ── Image ── */}
-        <div className="overflow-hidden relative bg-stone/10" style={{ aspectRatio: '16/10' }}>
+        {/* ── Image — LARGE elevation, tall 2:3 ratio to show full building ── */}
+        <div className="overflow-hidden relative bg-stone/10" style={{ aspectRatio: '2/3' }}>
           <img
-            src={project.image}
-            alt={project.name}
-            className="w-full h-full object-cover transition-transform duration-[1100ms]
+            src={project.largeImage || project.image}
+            alt={`${project.name} — elevation view`}
+            className="w-full h-full object-cover object-top transition-transform duration-[1200ms]
               ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
             loading="lazy"
             decoding="async"

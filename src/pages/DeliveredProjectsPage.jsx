@@ -107,7 +107,7 @@ export default function DeliveredProjectsPage() {
         */}
         <section
           className="bg-charcoal relative overflow-hidden"
-          style={{ paddingTop: 'calc(72px + 5rem)', paddingBottom: '5rem' }}
+          style={{ paddingTop: 'calc(80px + 5rem)', paddingBottom: '5rem' }}
           aria-label="Delivered projects header"
         >
           {/* Architectural image at low opacity — same pattern as ProjectsPage hero */}
