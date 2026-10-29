@@ -595,11 +595,11 @@ export const PROJECTS = [
     googleMapsHref: null,
 
     image:         '/images/16seventeen.jpg',
-    portraitImage: '/images/16seventeen-lg.jpg',
-    largeImage:    '/images/16seventeen-lg.jpg',
+    portraitImage: '/images/16seventeen.jpg',
+    largeImage:    '/images/16seventeen.jpg',
     gallery: [
+      { src: '/images/16seventeen.jpg',    alt: '16Seventeen Atelier — main elevation' },
       { src: '/images/16seventeen-lg.jpg', alt: '16Seventeen Atelier — architectural view' },
-      { src: '/images/16seventeen.jpg',    alt: '16Seventeen Atelier — exterior' },
     ],
 
     href:    '/projects/16seventeen-atelier/',
