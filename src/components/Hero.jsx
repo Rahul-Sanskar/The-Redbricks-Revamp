@@ -162,7 +162,7 @@ export default function Hero() {
               <p className="font-display font-light text-white text-2xl leading-none mb-0.5">
                 {s.value}
               </p>
-              <p className="font-sans text-[0.58rem] text-white/38 uppercase tracking-[0.14em]">
+              <p className="font-sans text-[0.58rem] text-white uppercase tracking-[0.14em]">
                 {s.label}
               </p>
             </div>
