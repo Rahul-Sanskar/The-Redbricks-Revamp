@@ -215,14 +215,21 @@ function ProjectCard({ project, index, prefersReduced, horizontal = false }) {
       >
         {/* ── Image — LARGE elevation, tall 2:3 ratio to show full building ── */}
         <div className="overflow-hidden relative bg-stone/10" style={{ aspectRatio: '2/3' }}>
-          <img
-            src={project.largeImage || project.image}
-            alt={`${project.name} — elevation view`}
-            className="w-full h-full object-cover object-top transition-transform duration-[1200ms]
-              ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
-            loading="lazy"
-            decoding="async"
-          />
+          <picture>
+            {/* Serve WebP for projects that have it */}
+            <source
+              srcSet={(project.largeImage || project.image).replace(/\.(jpg|jpeg)$/, '.webp')}
+              type="image/webp"
+            />
+            <img
+              src={project.largeImage || project.image}
+              alt={`${project.name} — elevation view`}
+              className="w-full h-full object-cover object-top transition-transform duration-[1200ms]
+                ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
           {/* Status badge — top-left, Pecan uses "Construction Update" label */}
           <span
             className={`absolute top-3 left-3 font-sans text-[0.58rem] tracking-[0.16em]

@@ -98,12 +98,13 @@ export const PROJECTS = [
     gps:            { lat: 19.0380627, lng: 73.0695065 },
     googleMapsHref: 'https://www.google.com/maps?daddr=19.0380627,73.0695065',
 
-    image:         '/images/crystal-corner.webp',
-    portraitImage: '/images/crystal-corner.webp',
-    largeImage:    '/images/crystal-corner-lg.webp',
+    image:         '/images/crystal-corner-main.jpg',
+    portraitImage: '/images/crystal-corner-main.jpg',
+    largeImage:    '/images/crystal-corner-main.jpg',
     gallery: [
-      { src: '/images/crystal-corner-lg.webp', alt: 'Crystal Corner — architectural view' },
-      { src: '/images/crystal-corner.webp',    alt: 'Crystal Corner — exterior' },
+      { src: '/images/crystal-corner-main.jpg', alt: 'Crystal Corner — main elevation' },
+      { src: '/images/crystal-corner-lg.webp',  alt: 'Crystal Corner — architectural view' },
+      { src: '/images/crystal-corner.webp',     alt: 'Crystal Corner — exterior' },
     ],
 
     href:    '/projects/crystal-corner/',
@@ -160,13 +161,13 @@ export const PROJECTS = [
     gps:            { lat: 19.0275499, lng: 73.0236524 },
     googleMapsHref: 'https://www.google.com/maps?daddr=19.0275499,73.0236524',
 
-    image:         '/images/silver-crest.jpg',
-    portraitImage: '/images/silver-crest-port.jpg',
-    largeImage:    '/images/silver-crest-lg.jpg',
+    image:         '/images/silver-crest-main.jpg',
+    portraitImage: '/images/silver-crest-main.jpg',
+    largeImage:    '/images/silver-crest-main.jpg',
     gallery: [
-      { src: '/images/silver-crest-lg.jpg',  alt: 'Silver Crest — architectural view' },
-      { src: '/images/silver-crest.jpg',     alt: 'Silver Crest — exterior' },
-      { src: '/images/silver-crest-port.jpg',alt: 'Silver Crest — elevation' },
+      { src: '/images/silver-crest-main.jpg',  alt: 'Silver Crest — main elevation' },
+      { src: '/images/silver-crest-lg.jpg',    alt: 'Silver Crest — architectural view' },
+      { src: '/images/silver-crest.jpg',        alt: 'Silver Crest — exterior' },
     ],
 
     href:    '/projects/silver-crest/',
