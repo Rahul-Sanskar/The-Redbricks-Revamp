@@ -165,9 +165,7 @@ export const PROJECTS = [
     portraitImage: '/images/silver-crest-main.jpg',
     largeImage:    '/images/silver-crest-main.jpg',
     gallery: [
-      { src: '/images/silver-crest-main.jpg',  alt: 'Silver Crest — main elevation' },
-      { src: '/images/silver-crest-lg.jpg',    alt: 'Silver Crest — architectural view' },
-      { src: '/images/silver-crest.jpg',        alt: 'Silver Crest — exterior' },
+      { src: '/images/silver-crest-main.jpg', alt: 'Silver Crest — main elevation' },
     ],
 
     href:    '/projects/silver-crest/',
@@ -598,8 +596,7 @@ export const PROJECTS = [
     portraitImage: '/images/16seventeen.jpg',
     largeImage:    '/images/16seventeen.jpg',
     gallery: [
-      { src: '/images/16seventeen.jpg',    alt: '16Seventeen Atelier — main elevation' },
-      { src: '/images/16seventeen-lg.jpg', alt: '16Seventeen Atelier — architectural view' },
+      { src: '/images/16seventeen.jpg', alt: '16Seventeen Atelier — main elevation' },
     ],
 
     href:    '/projects/16seventeen-atelier/',
