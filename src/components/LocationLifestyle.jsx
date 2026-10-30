@@ -113,8 +113,8 @@ export default function LocationLifestyle() {
         <div className="relative overflow-hidden order-1 lg:order-2"
           style={{ minHeight: '420px' }}>
           <motion.img
-            src="/images/mount-bliss.jpg"
-            alt="Modern architecture in Navi Mumbai"
+            src="/images/crystal-corner-main.jpg"
+            alt="Crystal Corner — Kharghar, Navi Mumbai"
             className="absolute inset-0 w-full h-full object-cover object-center"
             loading="lazy"
             decoding="async"
